@@ -15,7 +15,8 @@ class Pokemon:
         self.img = self.get_img()
         self.name = self.get_name()
         self.birth_date = datetime.now()
-
+        self.hp = randint(800, 1100)
+        self.power = randint(100, 200)
         Pokemon.pokemons[pokemon_trainer] = self
 
     # Метод для получения картинки покемона через API
@@ -41,7 +42,7 @@ class Pokemon:
 
     # Метод класса для получения информации
     def info(self):
-        return f"Имя твоего покемона: {self.name}\nВозраст: {self.age} лет"
+        return f"Имя твоего покемона: {self.name}\nВозраст: {self.age} лет hp: {self.hp} power: {self.power}"
 
     # Метод класса для получения картинки покемона
     def show_img(self):
@@ -61,3 +62,31 @@ def age_updater():
 
 age_thread = threading.Thread(target=age_updater, daemon=True)
 age_thread.start()
+
+# Логика аттаки
+def attack(self, enemy):
+    if enemy.hp > self.power:
+        enemy.hp -= self.power
+        return f"Сражение @{self.pokemon_trainer} с @{enemy.pokemon_trainer} осталось HP {enemy.hp}"
+    else:
+        enemy.hp = 0
+        return f"Победа @{self.pokemon_trainer} над @{enemy.pokemon_trainer}! "
+        
+class Fighter(Pokemon):
+    def __init__(self, pokemon_trainer):
+        super().__init__(pokemon_trainer)
+        self.hp -= randint(100, 200)
+        self.power += randint(100, 200)
+        self.name += 'Fighter'
+
+    def attack(self, enemy):
+        bonus = randint(-200, 500)
+        self.power += bonus
+        super().attack
+
+class Wizard(Pokemon):
+    def __init__(self, pokemon_trainer):
+        super().__init__(pokemon_trainer)
+        self.hp -= randint(100, 200)
+        self.power += randint(50, 100)
+        self.name += 'Wizard'
