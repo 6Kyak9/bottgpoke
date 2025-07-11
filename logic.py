@@ -84,6 +84,12 @@ class Pokemon:
         else:
             return f"Следующее время кормления покемона: {self.last_feed_time+delta_time}"
         
+    #Информация о покемоне
+    def info(self):
+        return f"""Имя твоего покемона: {self.name}
+    Сила покемона: {self.power}
+    Здоровье покемона: {self.hp}"""
+        
 class Fighter(Pokemon):
     def __init__(self, pokemon_trainer):
         super().__init__(pokemon_trainer)
