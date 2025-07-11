@@ -43,5 +43,14 @@ def get_age(message):
     else:
         bot.reply_to(message, "У тебя еще нет покемона. Напиши /go чтобы создать его")
 
+@bot.message_handler(commands=['feed'])
+def feed_pok(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pok = Pokemon.pokemons[message.from_user.username]
+        res = pok.feed()
+        bot.send_message(message.chat.id, res)
+    else:
+        bot.send_message(message.chat.id, "Ты не создал себе покемона")
+
 bot.infinity_polling(none_stop=True)
 
